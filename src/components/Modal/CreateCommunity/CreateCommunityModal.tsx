@@ -79,7 +79,6 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
         if (communityDoc.exists()) {
           throw new Error(`Sorry, r/${communityName} is taken. Try another.`);
         }
-
         transaction.set(communityDocRef, {
           creatorId: user?.uid,
           createdAt: serverTimestamp(),

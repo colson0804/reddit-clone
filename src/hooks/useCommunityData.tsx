@@ -46,7 +46,6 @@ const useCommunityData = () => {
   };
 
   const getMySnippets = async () => {
-    console.log("Get my snippets");
     setIsLoading(true);
     try {
       const snippetDocs = await getDocs(
@@ -149,7 +148,6 @@ const useCommunityData = () => {
   };
 
   useEffect(() => {
-    console.log("use effect");
     if (!user) {
       setCommunityStateValue((prev) => ({
         ...prev,

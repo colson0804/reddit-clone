@@ -71,6 +71,7 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
                 onVote={onVote}
                 onDeletePost={onDeletePost}
                 onSelectPost={onSelectPost}
+                homePage
               />
             );
           })}

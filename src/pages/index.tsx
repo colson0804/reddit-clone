@@ -10,7 +10,7 @@ import {
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Post } from "../atoms/postAtom";
+import { Post, PostVote } from "../atoms/postAtom";
 import CreatePostLink from "../components/Community/CreatePostLink";
 import PageContent from "../components/Layout/PageContent";
 import PostItem from "../components/Posts/PostItem";
@@ -82,7 +82,27 @@ const Home: NextPage = () => {
     setLoading(false);
   };
 
-  const getUserPostVotes = () => {};
+  const getUserPostVotes = async () => {
+    try {
+      const postIds = postStateValue.posts.map((post) => post.id);
+      const postVotesQuery = query(
+        collection(firestore, `users/${user?.uid}/postVotes`),
+        where("postId", "in", postIds)
+      );
+      const postVoteDocs = await getDocs(postVotesQuery);
+      const postVotes = postVoteDocs.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setPostStateValue((prev) => ({
+        ...prev,
+        postVotes: postVotes as PostVote[],
+      }));
+    } catch (error) {
+      console.log("getUserPostVotes error", error);
+    }
+  };
 
   useEffect(() => {
     if (!user && !loadingUser) buildNoUserHomeFeed();
@@ -91,6 +111,17 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (communityStateValue.snippetsFetched) buildUserHomeFeed();
   }, [communityStateValue.snippetsFetched]);
+
+  useEffect(() => {
+    if (user && postStateValue.posts.length) getUserPostVotes();
+
+    return () => {
+      setPostStateValue((prev) => ({
+        ...prev,
+        postVotes: [],
+      }));
+    };
+  }, [user, postStateValue.posts]);
 
   return (
     <PageContent>

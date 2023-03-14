@@ -2,13 +2,13 @@ import { Flex, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import { TabItem } from "./NewPostForm";
 
-type TabItemProps = {
+type TabItemViewProps = {
   item: TabItem;
   selected: boolean;
   setSelectedTab: (value: string) => void;
 };
 
-const TabItem: React.FC<TabItemProps> = ({
+const TabItemView: React.FC<TabItemViewProps> = ({
   item,
   selected,
   setSelectedTab,
@@ -35,4 +35,4 @@ const TabItem: React.FC<TabItemProps> = ({
     </Flex>
   );
 };
-export default TabItem;
+export default TabItemView;

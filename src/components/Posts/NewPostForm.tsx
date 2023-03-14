@@ -13,7 +13,7 @@ import { IoDocumentText, IoImageOutline } from "react-icons/io5";
 import { BiPoll } from "react-icons/bi";
 import { BsLink45Deg, BsMic } from "react-icons/bs";
 import { AiFillCloseCircle } from "react-icons/ai";
-import TabItem from "./TabItem";
+import TabItemView from "./TabItemView";
 import TextInputs from "./PostForm/TextInputs";
 import ImageUpload from "./PostForm/ImageUpload";
 import { Post } from "@/src/atoms/postAtom";
@@ -132,7 +132,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
     <Flex direction="column" bg="white" borderRadius={4} mt={2}>
       <Flex width="100%">
         {formTabs.map((item) => (
-          <TabItem
+          <TabItemView
             key={item.title}
             item={item}
             selected={item.title === selectedTab}

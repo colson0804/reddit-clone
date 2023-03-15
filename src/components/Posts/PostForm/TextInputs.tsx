@@ -45,7 +45,7 @@ const TextInputs: React.FC<TextInputsProps> = ({
         fontSize="10pt"
         borderRadius={4}
         height="100px"
-        placeholder="Text (optional"
+        placeholder="Text (optional)"
         _placeholder={{ color: "gray.500" }}
         _focus={{
           outline: "none",
